@@ -1,12 +1,60 @@
 import React from 'react';
+import { Typography, Button, Row, Col, Statistic, Card, Space } from 'antd';
+import {
+  FlagOutlined,
+  TeamOutlined,
+  AlertOutlined,
+  DollarOutlined,
+  ArrowDownOutlined,
+  SafetyOutlined,
+  AimOutlined,
+  FileProtectOutlined
+} from '@ant-design/icons';
 import { motion } from 'framer-motion';
-import { Shield, Users, Scale, ArrowDown, AlertTriangle } from 'lucide-react';
+
+const { Title, Paragraph } = Typography;
 
 const Hero: React.FC = () => {
   const stats = [
-    { label: 'Vụ án lớn', value: '100+', icon: AlertTriangle },
-    { label: 'Tổng thiệt hại', value: '500+ tỷ', icon: Scale },
-    { label: 'Cán bộ xử lý', value: '1000+', icon: Users },
+    {
+      title: 'Vụ án điều tra',
+      value: 1500,
+      prefix: '+',
+      icon: <FileProtectOutlined className="text-2xl text-blue-500" />,
+      description: 'Số vụ án tham nhũng đã và đang điều tra'
+    },
+    {
+      title: 'Thu hồi tài sản',
+      value: 1000,
+      suffix: ' tỷ',
+      icon: <DollarOutlined className="text-2xl text-green-500" />,
+      description: 'Tổng giá trị tài sản đã thu hồi từ tham nhũng'
+    },
+    {
+      title: 'Cán bộ xử lý',
+      value: 2500,
+      prefix: '+',
+      icon: <TeamOutlined className="text-2xl text-orange-500" />,
+      description: 'Số cán bộ, đảng viên bị xử lý kỷ luật'
+    }
+  ];
+
+  const features = [
+    {
+      icon: <SafetyOutlined className="text-2xl" />,
+      title: 'Đảng trong sạch',
+      description: 'Xây dựng Đảng trong sạch, vững mạnh là nhiệm vụ then chốt'
+    },
+    {
+      icon: <AimOutlined className="text-2xl" />,
+      title: 'Không vùng cấm',
+      description: 'Kiên quyết xử lý tham nhũng không có vùng cấm, không có ngoại lệ'
+    },
+    {
+      icon: <AlertOutlined className="text-2xl" />,
+      title: 'Phòng ngừa',
+      description: 'Chú trọng công tác phòng ngừa, ngăn chặn từ sớm, từ xa'
+    }
   ];
 
   const scrollToContent = () => {
@@ -17,141 +65,121 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50" />
-      
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -100, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 left-20 w-32 h-32 bg-primary-100 rounded-full opacity-20"
-        />
-        <motion.div
-          animate={{
-            x: [0, -150, 0],
-            y: [0, 100, 0],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute bottom-20 right-20 w-40 h-40 bg-secondary-100 rounded-full opacity-20"
-        />
-        <motion.div
-          animate={{
-            x: [0, 200, 0],
-            y: [0, -50, 0],
-            rotate: [0, -180, -360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-1/2 left-1/2 w-24 h-24 bg-accent-100 rounded-full opacity-30"
-        />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-6xl mx-auto">
-          {/* Main heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              <span className="text-gradient">
-                "Tham nhũng là từ trong Đảng mà ra"
-              </span>
-            </h1>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-700 font-medium mb-4">
-              Thách thức trong việc xây dựng Đảng và Nhà nước
-            </p>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Phân tích tư tưởng Hồ Chí Minh về xây dựng Đảng trong sạch, vững mạnh 
-              và Nhà nước của dân, do dân, vì dân trong bối cảnh chống tham nhũng hiện nay
-            </p>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-soft-lg border border-white/20 hover:shadow-xl transition-all duration-300 group"
-              >
-                <div className="flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mb-4 mx-auto group-hover:scale-110 transition-transform">
-                  <stat.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-sm font-medium text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Call to action */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="space-y-6"
-          >
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={scrollToContent}
-                className="bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 group"
-              >
-                <Shield className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                <span>Khám phá nội dung</span>
-              </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-50 transition-all duration-300 flex items-center space-x-2 group"
-              >
-                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Tìm hiểu thêm</span>
-              </motion.button>
-            </div>
-
-            {/* Scroll indicator */}
+    <section className="min-h-screen pt-24 pb-16 relative overflow-hidden bg-gradient">
+      <div className="container mx-auto px-4">
+        {/* Main Content */}
+        <Row gutter={[32, 48]} className="items-center mb-16">
+          {/* Left Column - Text Content */}
+          <Col xs={24} lg={12}>
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              onClick={scrollToContent}
-              className="flex flex-col items-center space-y-2 text-gray-500 hover:text-primary-600 cursor-pointer transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <span className="text-sm font-medium">Cuộn xuống để xem thêm</span>
-              <ArrowDown className="w-6 h-6" />
+              <Space direction="vertical" size="large" className="w-full">
+                {/* Flag Icon */}
+                <div className="inline-block p-4 bg-white rounded-full shadow-lg">
+                  <FlagOutlined className="text-4xl text-red-600" />
+                </div>
+
+                {/* Headings */}
+                <div>
+                  <Title level={1} className="!text-5xl !mb-6">
+                    <span className="text-gradient">Tham nhũng là từ trong Đảng mà ra</span>
+                  </Title>
+                  <Title level={2} className="!text-2xl !font-normal !text-gray-700 !mb-8">
+                    Thách thức trong việc xây dựng Đảng và Nhà nước
+                  </Title>
+                  <Paragraph className="text-lg text-gray-600">
+                    Phân tích tư tưởng Hồ Chí Minh về xây dựng Đảng trong sạch, vững mạnh 
+                    và Nhà nước của dân, do dân, vì dân trong bối cảnh chống tham nhũng hiện nay.
+                  </Paragraph>
+                </div>
+
+                {/* CTA Buttons */}
+                <Space size="middle">
+                  <Button
+                    type="primary"
+                    size="large"
+                    onClick={scrollToContent}
+                    icon={<ArrowDownOutlined />}
+                    className="shadow-lg"
+                  >
+                    Khám phá chi tiết
+                  </Button>
+                  <Button size="large">Tìm hiểu thêm</Button>
+                </Space>
+              </Space>
             </motion.div>
-          </motion.div>
-        </div>
+          </Col>
+
+          {/* Right Column - Stats */}
+          <Col xs={24} lg={12}>
+            <Row gutter={[16, 16]}>
+              {stats.map((stat, index) => (
+                <Col xs={24} md={8} key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <Card hoverable className="text-center h-full shadow-card shadow-card-hover">
+                      <Space direction="vertical" size="middle" className="w-full">
+                        {stat.icon}
+                        <Statistic
+                          title={stat.title}
+                          value={stat.value}
+                          prefix={stat.prefix}
+                          suffix={stat.suffix}
+                        />
+                        <Paragraph type="secondary" className="!mb-0">
+                          {stat.description}
+                        </Paragraph>
+                      </Space>
+                    </Card>
+                  </motion.div>
+                </Col>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+
+        {/* Features */}
+        <Row gutter={[32, 32]} className="mt-24">
+          {features.map((feature, index) => (
+            <Col xs={24} md={8} key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+              >
+                <Card hoverable className="text-center h-full shadow-card shadow-card-hover">
+                  <Space direction="vertical" size="middle" className="w-full">
+                    {feature.icon}
+                    <Title level={3} className="!mb-2 !text-xl">
+                      {feature.title}
+                    </Title>
+                    <Paragraph type="secondary" className="!mb-0">
+                      {feature.description}
+                    </Paragraph>
+                  </Space>
+                </Card>
+              </motion.div>
+            </Col>
+          ))}
+        </Row>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center cursor-pointer"
+        onClick={scrollToContent}
+      >
+        <Paragraph type="secondary">Cuộn xuống để xem thêm</Paragraph>
+        <ArrowDownOutlined className="text-xl text-gray-400" />
+      </motion.div>
     </section>
   );
 };
