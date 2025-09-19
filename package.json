@@ -10,8 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.23.15",
+    "gsap": "^3.13.0",
+    "lucide-react": "^0.544.0",
+    "postcss": "^8.5.6",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^3.2.1",
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
