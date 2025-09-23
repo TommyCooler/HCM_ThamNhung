@@ -14,6 +14,10 @@ const BuildingIcon = ({ className }: IconProps) => (<svg className={className} x
 const CheckCircle = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>);
 const SearchXIcon = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="13" y1="9" x2="9" y2="13"></line><line x1="9" y1="9" x2="13" y2="13"></line></svg>);
 const BombIcon = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M15.31 15.31 8.69 8.69"></path><path d="M15.31 8.69 8.69 15.31"></path><path d="m14 2-2 3-2-3"></path><path d="m10 22 2-3 2 3"></path><path d="m2 10 3 2-3 2"></path><path d="m22 14-3-2 3-2"></path></svg>);
+const FlameIcon = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>);
+const DollarSignIcon = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>);
+const TrendingUpIcon = ({ className }: IconProps) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>);
+
 
 // --- CÁC THÀNH PHẦN (COMPONENTS) ---
 
@@ -101,17 +105,125 @@ const HorizontalSnapCarousel = () => {
     );
 };
 
-const TimelineItem = ({ icon, title, children, isLast = false }: { icon: React.ReactNode; title: string; children: React.ReactNode; isLast?: boolean }) => (
-    <motion.div variants={itemVariants} className="flex">
-        <div className="flex flex-col items-center mr-6">
-            <div className="flex items-center justify-center w-14 h-14 bg-slate-800 border-2 border-purple-500 rounded-full text-purple-400 shrink-0">
-                {icon && React.isValidElement(icon) && React.cloneElement(icon as React.ReactElement<any>, { className: "w-8 h-8" })}
+const StatsGrid = () => {
+    const stats = [
+        {
+            title: "Tổng số vụ án",
+            value: "3,467",
+            description: "Tăng 23% so với năm trước",
+            icon: <FlameIcon className="w-10 h-10 text-red-400" />,
+            color: "red"
+        },
+        {
+            title: "Thiệt hại kinh tế",
+            value: "1,234.5 tỷ",
+            description: "Đã thu hồi 60%",
+            icon: <DollarSignIcon className="w-10 h-10 text-blue-400" />,
+            color: "blue"
+        },
+        {
+            title: "Cán bộ liên quan",
+            value: "5,678",
+            description: "Từ cấp phó phòng trở lên",
+            icon: <UsersIcon className="w-10 h-10 text-cyan-400" />,
+            color: "cyan"
+        },
+        {
+            title: "Tăng trưởng số vụ",
+            value: "23.4%",
+            description: "So với cùng kỳ năm trước",
+            icon: <TrendingUpIcon className="w-10 h-10 text-orange-400" />,
+            color: "orange"
+        }
+    ];
+
+    return (
+        <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+        >
+            {stats.map((stat) => (
+                <motion.div
+                    key={stat.title}
+                    variants={itemVariants}
+                    className="bg-slate-900/50 p-6 rounded-2xl border border-slate-700 text-center flex flex-col items-center"
+                >
+                    <div className="mb-4">{stat.icon}</div>
+                    <p className="text-sm text-slate-400 mb-1">{stat.title}</p>
+                    <p className={`text-4xl font-bold text-${stat.color}-400 mb-2`}>{stat.value}</p>
+                    <p className="text-sm text-slate-500">{stat.description}</p>
+                </motion.div>
+            ))}
+        </motion.div>
+    );
+};
+
+
+const EventsTimeline = () => {
+    const events = [
+        {
+            tag: "Nghị quyết",
+            year: "2016",
+            title: "Nghị quyết Trung ương 4 khóa XII",
+            description: "Một bước đột phá trong công tác xây dựng, chỉnh đốn Đảng, tập trung ngăn chặn suy thoái tư tưởng, đạo đức - \"cái gốc\" của tham nhũng.",
+        },
+        {
+            tag: "Đại hội",
+            year: "2021",
+            title: "Đại hội Đảng XIII và Kết luận 21",
+            description: "Tiếp tục khẳng định và đẩy mạnh toàn diện công tác phòng, chống tham nhũng, xem đây là nhiệm vụ trọng tâm hàng đầu.",
+        },
+        {
+            tag: "Chiến dịch",
+            year: "",
+            title: "Chiến dịch \"đốt lò\"",
+            description: "Xử lý nhiều vụ án tham nhũng lớn, phức tạp, không có \"vùng cấm\", \"ngoại lệ\", củng cố niềm tin của nhân dân.",
+        },
+        {
+            tag: "Tổ chức",
+            year: "",
+            title: "Ban Chỉ đạo Trung ương",
+            description: "Thể hiện sự lãnh đạo tập trung, quyết liệt của Đảng trong việc chỉ đạo, đôn đốc, kiểm tra, giám sát công tác phòng, chống tham nhũng.",
+        },
+    ];
+
+    return (
+        <div className="relative max-w-5xl mx-auto">
+            <div className="absolute left-1/2 top-0 h-full w-px bg-slate-700/50" aria-hidden="true"></div>
+            <div className="relative pt-2">
+                {events.map((item, index) => (
+                    <motion.div
+                        key={item.title}
+                        className={`relative mb-12 flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: 'easeOut' }}
+                        viewport={{ once: true, amount: 0.5 }}
+                    >
+                        <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                            <div className="p-6 bg-slate-900/50 rounded-2xl border border-slate-700 relative shadow-lg">
+                                <div className={`absolute top-1/2 -mt-3 w-6 h-6 bg-slate-900 border-slate-700 transform rotate-45 ${index % 2 === 0 ? '-right-3 border-t border-r' : '-left-3 border-b border-l'}`}></div>
+                                <div className="flex items-center gap-2 mb-2 justify-start">
+                                    {item.year && <span className="text-sm font-bold bg-purple-900/50 text-purple-400 px-2 py-1 rounded">{item.year}</span>}
+                                    <span className="text-sm font-bold bg-slate-700 text-slate-300 px-2 py-1 rounded">{item.tag}</span>
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-100 mb-2">{item.title}</h3>
+                                <p className="text-slate-400 text-base">{item.description}</p>
+                            </div>
+                        </div>
+                        <div className="absolute left-1/2 -ml-4 w-8 h-8 flex items-center justify-center bg-slate-800 rounded-full border-2 border-purple-500">
+                            <NewspaperIcon className="w-4 h-4 text-purple-400" />
+                        </div>
+                    </motion.div>
+                ))}
             </div>
-            {!isLast && <div className="w-px h-full bg-slate-700"></div>}
         </div>
-        <div className="pb-10"><h4 className="text-2xl font-bold text-purple-400 mb-2">{title}</h4><div className="text-slate-300 space-y-2 text-lg">{children}</div></div>
-    </motion.div>
-);
+    );
+};
+
 
 const SolutionsGrid = () => {
     const solutions = [
@@ -213,7 +325,7 @@ const TypingTitle = ({ text }: { text: string }) => {
     return (
         <motion.h2
             key={key}
-            className="text-4xl md:text-6xl font-extrabold text-slate-100 mt-2 flex flex-wrap justify-center overflow-hidden"
+            className="text-4xl md:text-6xl font-extrabold text-slate-100 mt-2 flex flex-wrap justify-center"
             variants={container}
             initial="hidden"
             animate="visible"
@@ -243,7 +355,7 @@ export default function App() {
     }, [sections]);
 
     return (
-        <div className="bg-slate-950 font-sans text-slate-300 relative overflow-x-hidden">
+        <div className="bg-slate-950 font-sans text-slate-300 relative">
             <div className="absolute top-0 left-0 w-full h-full z-0">
                 <div className="absolute top-[10vh] -left-[10vw] w-[40vw] h-[40vw] bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute top-[50vh] right-0 w-[50vw] h-[50vw] bg-purple-500/10 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
@@ -332,23 +444,8 @@ export default function App() {
                         <SectionHeader title="Thực trạng tham nhũng và tác hại hiện nay">
                             Tham nhũng ngày càng tinh vi, có tổ chức và mang tính hệ thống, xuất hiện ở nhiều lĩnh vực. Các vụ án lớn cho thấy mức độ nghiêm trọng của vấn đề.
                         </SectionHeader>
+                        <StatsGrid />
                         <HorizontalSnapCarousel />
-                        <div className="grid md:grid-cols-2 gap-8 mt-24 max-w-6xl mx-auto">
-                           <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="p-8 bg-slate-900/50 rounded-2xl border border-slate-700 space-y-4">
-                               <div className="flex items-center gap-4">
-                                   <SearchXIcon className="w-10 h-10 text-red-400"/>
-                                   <h4 className="font-bold text-3xl text-red-400">Nguyên nhân</h4>
-                               </div>
-                                <p className="text-lg">Sự suy thoái về tư tưởng, đạo đức của một bộ phận cán bộ, cùng với cơ chế kiểm soát quyền lực còn lỏng lẻo và kẽ hở trong pháp luật.</p>
-                           </motion.div>
-                            <motion.div initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.8, delay: 0.2}} viewport={{once: true}} className="p-8 bg-slate-900/50 rounded-2xl border border-slate-700 space-y-4">
-                                <div className="flex items-center gap-4">
-                                   <BombIcon className="w-10 h-10 text-red-400"/>
-                                   <h4 className="font-bold text-3xl text-red-400">Tác hại</h4>
-                               </div>
-                               <p className="text-lg">Làm xói mòn lòng tin, hủy hoại đạo đức xã hội và nghiêm trọng hơn là đe dọa sự tồn vong của Đảng và chế độ.</p>
-                           </motion.div>
-                        </div>
                     </section>
 
                      <div className="h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent my-32"></div>
@@ -366,14 +463,7 @@ export default function App() {
                         <SectionHeader title="Những sự kiện, văn kiện liên quan">
                              Các Nghị quyết, Kết luận của Đảng cùng với chiến dịch "đốt lò" quyết liệt đã thể hiện sự nhất quán và quyết tâm chính trị rất cao trong công cuộc phòng, chống tham nhũng.
                         </SectionHeader>
-                        <div className="max-w-3xl mx-auto">
-                            <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{once: true}}>
-                                <TimelineItem icon={<NewspaperIcon/>} title="Nghị quyết Trung ương 4 khóa XII (2016)"><p>Bước đột phá, tập trung ngăn chặn suy thoái tư tưởng, đạo đức - "cái gốc" của tham nhũng.</p></TimelineItem>
-                                <TimelineItem icon={<NewspaperIcon/>} title="Đại hội Đảng XIII (2021) và Kết luận 21"><p>Tiếp tục khẳng định phòng, chống tham nhũng là nhiệm vụ trọng tâm hàng đầu, đẩy mạnh toàn diện.</p></TimelineItem>
-                                <TimelineItem icon={<NewspaperIcon/>} title="Chiến dịch 'đốt lò'"><p>Xử lý nhiều vụ án lớn, không có "vùng cấm", "ngoại lệ", củng cố niềm tin của nhân dân.</p></TimelineItem>
-                                <TimelineItem icon={<LandmarkIcon/>} title="Ban Chỉ đạo Trung ương" isLast><p>Thể hiện sự lãnh đạo tập trung, quyết liệt của Đảng trong cuộc chiến này.</p></TimelineItem>
-                            </motion.div>
-                        </div>
+                        <EventsTimeline />
                     </section>
 
                     <div className="h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent my-32"></div>
@@ -392,11 +482,10 @@ export default function App() {
 
                 <footer className="bg-slate-950 border-t border-slate-800">
                     <div className="container mx-auto px-6 py-6 text-center text-slate-500">
-                        <p>&copy; 2025 - Bài thuyết trình về công tác xây dựng Đảng và Nhà nước.</p>
+                        <p>&copy; 2025 - Công tác xây dựng Đảng và Nhà nước.</p>
                     </div>
                 </footer>
             </div>
         </div>
     );
 }
-
