@@ -1122,8 +1122,7 @@ export default function App() {
                   Khẳng định
                 </h4>
                 <p>
-                  Phòng, chống tham nhũng là cuộc chiến sinh tử, quyết định sự
-                  sống còn của chế độ.
+                   Phòng, chống tham nhũng không chỉ là một nhiệm vụ cấp bách, mà là một cuộc chiến sinh tử, mang ý nghĩa chiến lược lâu dài. Đây là cuộc chiến “chống giặc nội xâm”, quyết định sự sống còn của chế độ và tương lai của dân tộc.
                 </p>
               </motion.div>
               <motion.div
@@ -1134,8 +1133,7 @@ export default function App() {
                   Thông điệp
                 </h4>
                 <p>
-                  Muốn thắng lợi, phải có sự đồng lòng của cả Đảng, Nhà nước và
-                  nhân dân.
+                  Muốn thắng lợi, phải có sự đồng lòng của cả Đảng, Nhà nước và nhân dân. “Đảng với dân như cá với nước, có dân là sống, thoát ly dân là chết”. 
                 </p>
               </motion.div>
               <motion.div
@@ -1146,17 +1144,55 @@ export default function App() {
                   Trách nhiệm
                 </h4>
                 <p>
-                  Cán bộ giữ chức vụ càng cao, trách nhiệm nêu gương càng lớn.
+                  Mọi người dân và mỗi cán bộ, đảng viên đều có trách nhiệm trong cuộc chiến này. Đặc biệt, cán bộ giữ chức vụ càng cao, trách nhiệm nêu gương càng lớn.
                 </p>
               </motion.div>
             </motion.div>
           </section>
         </main>
-        <footer className="bg-slate-950 border-t border-slate-800">
-          <div className="container mx-auto px-6 py-6 text-center text-slate-500">
-            <p>&copy; 2025 - Công tác xây dựng Đảng và Nhà nước.</p>
+      <footer className="bg-slate-950 border-t border-slate-800 text-slate-400">
+        <div className="container mx-auto px-6 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+              <h5 className="text-lg font-bold text-white mb-4">
+                Quyết tâm, kiên trì đấu tranh
+              </h5>
+              <p className="text-sm">
+                "Phòng, chống tham nhũng, tiêu cực không có vùng cấm, không có
+                ngoại lệ, bất kể người đó là ai."
+              </p>
+              <p className="text-sm mt-2 font-semibold">- Tổng Bí thư Nguyễn Phú Trọng -</p>
+            </div>
+
+            <div>
+              <h5 className="text-lg font-bold text-white mb-4">
+                Liên kết hữu ích
+              </h5>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-cyan-400 transition-colors">Văn bản pháp luật</a></li>
+                <li><a href="#" className="hover:text-cyan-400 transition-colors">Tin tức & Sự kiện</a></li>
+                <li><a href="#" className="hover:text-cyan-400 transition-colors">Báo cáo & Thống kê</a></li>
+                <li><a href="#" className="hover:text-cyan-400 transition-colors">Kênh tố giác tham nhũng</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h5 className="text-lg font-bold text-white mb-4">Thông tin</h5>
+              <p className="text-sm">
+                Trang thông tin tuyên truyền về công tác phòng, chống tham nhũng, tiêu cực.
+              </p>
+              <p className="text-sm mt-2">
+                Góp phần xây dựng Đảng và Nhà nước ta ngày càng trong sạch, vững mạnh.
+              </p>
+            </div>
           </div>
-        </footer>
+          <div className="mt-10 pt-6 border-t border-slate-800 text-center text-sm text-slate-500">
+            <p>
+              Bản quyền thuộc về Ban Nội chính Trung ương. Phát triển bởi Gemini.
+            </p>
+          </div>
+        </div>
+      </footer>
       </div>
     </div>
   );
