@@ -885,7 +885,7 @@ export default function App() {
         <Header sections={sections} activeSection={activeSection} />
         <main className="container mx-auto px-6 py-12">
           <div className="text-center pt-16 pb-24 min-h-[70vh] flex flex-col justify-center">
-            <TypingTitle text="“... Tham nhũng là từ trong Đảng mà ra....”" />
+            <TypingTitle text="“.. Tham nhũng là từ trong Đảng mà ra..”" />
             <motion.p
               className="text-lg text-slate-400 mt-6 max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
