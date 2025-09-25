@@ -354,7 +354,7 @@ const SectionHeader = ({
   </motion.div>
 );
 
-// SỬA LỖI TYPESCRIPT: Thay đổi `penalties: string[]` thành `penalties: readonly string[]`
+// CẬP NHẬT PROPS: THÊM `imageSrc` VÀ SỬA LỖI `penalties`
 type CaseStudyCardProps = {
   title: string;
   company: string;
@@ -363,6 +363,7 @@ type CaseStudyCardProps = {
   color: "red" | "purple" | "green";
   isActive: boolean;
   audioSrc: string;
+  imageSrc: string;
 };
 
 const CaseStudyCard = ({
@@ -373,6 +374,7 @@ const CaseStudyCard = ({
   color,
   isActive,
   audioSrc,
+  imageSrc,
 }: CaseStudyCardProps) => {
   const colorHex: { [key: string]: string } = {
     red: "#f87171",
@@ -410,28 +412,45 @@ const CaseStudyCard = ({
             />
           )}
         </AnimatePresence>
+        {/* CẬP NHẬT LAYOUT: THÊM `overflow-hidden` VÀ `flex-col` */}
         <div
-          className={`relative bg-slate-900 rounded-[10px] h-full flex flex-col`}
+          className={`relative bg-slate-900 rounded-[10px] h-full flex flex-col overflow-hidden`}
         >
           <CardAudioPlayer src={audioSrc} color={color} />
-          <div className={`p-6 border-b ${specificColorClasses.border}`}>
-            <h4 className={`text-3xl font-bold ${specificColorClasses.text}`}>
-              {title}
-            </h4>
-            <p className="text-lg text-slate-400 font-medium mt-1">{company}</p>
+
+          {/* THÊM KHỐI HIỂN THỊ HÌNH ẢNH */}
+          <div className="relative h-48 w-full">
+            <img
+              src={imageSrc}
+              alt={`Minh họa vụ án ${title}`}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
           </div>
-          <div className="p-6 space-y-4 text-lg flex-grow">
-            <div>
-              <strong className="text-slate-200">Hình phạt tiêu biểu:</strong>
-              <ul className="list-disc list-inside text-slate-300 mt-2 space-y-2">
-                {penalties.map((p, i) => (
-                  <li key={i}>{p}</li>
-                ))}
-              </ul>
+
+          {/* KHỐI NỘI DUNG VĂN BẢN */}
+          <div className="flex flex-col flex-grow p-6">
+            <div className={`border-b ${specificColorClasses.border} pb-4`}>
+              <h4 className={`text-3xl font-bold ${specificColorClasses.text}`}>
+                {title}
+              </h4>
+              <p className="text-lg text-slate-400 font-medium mt-1">
+                {company}
+              </p>
             </div>
-            <div className="pt-2">
-              <strong className="text-slate-200">Thiệt hại:</strong>
-              <p className="text-slate-300">{damage}</p>
+            <div className="pt-4 space-y-4 text-lg flex-grow">
+              <div>
+                <strong className="text-slate-200">Hình phạt tiêu biểu:</strong>
+                <ul className="list-disc list-inside text-slate-300 mt-2 space-y-2">
+                  {penalties.map((p, i) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="pt-2">
+                <strong className="text-slate-200">Thiệt hại:</strong>
+                <p className="text-slate-300">{damage}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -441,6 +460,7 @@ const CaseStudyCard = ({
 };
 
 const HorizontalSnapCarousel = () => {
+  // CẬP NHẬT DỮ LIỆU: THÊM `imageSrc` CHO MỖI VỤ ÁN
   const caseStudies = [
     {
       title: "Vụ án Việt Á",
@@ -449,6 +469,7 @@ const HorizontalSnapCarousel = () => {
       damage: "Hơn 1.100 tỷ đồng",
       color: "red",
       audioSrc: "/audios/vu-an-viet-a.mp3",
+      imageSrc: "/images/vu-an-viet-a.png",
     },
     {
       title: "Vụ án Vạn Thịnh Phát",
@@ -460,6 +481,7 @@ const HorizontalSnapCarousel = () => {
       damage: "~498.000 tỷ đồng",
       color: "purple",
       audioSrc: "/audios/vu-an-van-thinh-phat.mp3",
+      imageSrc: "/images/vu-an-van-thinh-phat.png",
     },
     {
       title: "Vụ án FLC",
@@ -468,6 +490,7 @@ const HorizontalSnapCarousel = () => {
       damage: "Gần 2.000 tỷ đồng",
       color: "green",
       audioSrc: "/audios/vu-an-flc.mp3",
+      imageSrc: "/images/vu-an-flc.png",
     },
   ] as const;
 
@@ -507,7 +530,7 @@ const HorizontalSnapCarousel = () => {
   return (
     <div
       ref={containerRef}
-      className="h-[80vh] flex flex-col justify-center items-center relative overflow-hidden"
+      className="h-[90vh] flex flex-col justify-center items-center relative overflow-hidden"
     >
       <div className="w-full">
         <motion.div
